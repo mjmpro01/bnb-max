@@ -367,7 +367,13 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
 				"name": "stake",
 				"outputs": [],
 				"stateMutability": "payable",
@@ -557,11 +563,11 @@
 			]
 		},
 		"EnhancedStaking.sol": {
-			"keccak256": "0xebaeaf4adbe867d75c7971aa6ec3cde7f711e479e7b781fd2aafedadcdef5a84",
+			"keccak256": "0xcc6de217e81abd7730c010b9d65f7acba934b3027f5068b072383d38e42a6433",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2366f5b17e14256f0e2b0576de90a6b9b0c517f4a402ccf9b2e0adcf4e7b182f",
-				"dweb:/ipfs/Qmce8yQUJtXMQWJr9kEvsk5myaMtUBXS6NjsEdn71JkhXR"
+				"bzz-raw://827c4ebcffd6720a4490daafad04b203510c2b9b10b12956f676892be8e854f4",
+				"dweb:/ipfs/QmZCgQpyyNv9nYyc6Cwrnz32iAsEMUH6ro391uR44cTiyg"
 			]
 		}
 	},

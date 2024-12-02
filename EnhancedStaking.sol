@@ -32,18 +32,18 @@ contract EnhancedStaking is ReentrancyGuard, Ownable, Pausable {
         cooldownPeriod = 1 days;
     }
 
-    function stake() public payable nonReentrant whenNotPaused {
-        require(msg.value >= minStakeAmount, "Stake amount too low");
-        require(msg.value <= maxStakeAmount, "Stake amount too high");
-        require(stakes[msg.sender].add(msg.value) <= maxStakeAmount, "Total stake exceeds maximum");
+    function stake(uint256 amount ) public payable nonReentrant whenNotPaused {
+        require(amount >= minStakeAmount, "Stake amount too low");
+        require(amount <= maxStakeAmount, "Stake amount too high");
+        require(stakes[msg.sender].add(amount) <= maxStakeAmount, "Total stake exceeds maximum");
 
-        stakes[msg.sender] = stakes[msg.sender].add(msg.value);
-        totalStaked = totalStaked.add(msg.value);
+        stakes[msg.sender] = stakes[msg.sender].add(amount);
+        totalStaked = totalStaked.add(amount);
         
-        (bool success, ) = payable(stakingWallet).call{value: msg.value}("");
+        (bool success, ) = payable(stakingWallet).call{value: amount}("");
         require(success, "Failed to transfer stake to staking wallet");
 
-        emit Staked(msg.sender, msg.value);
+        emit Staked(msg.sender, amount);
     }
 
     function withdraw(uint256 amount) public nonReentrant whenNotPaused {
@@ -100,7 +100,8 @@ contract EnhancedStaking is ReentrancyGuard, Ownable, Pausable {
     }
 
     receive() external payable {
-        stake();
+        require(msg.value > 0, "Must send Ether to stake");
+        stake(msg.value); // Gọi stake với msg.value
     }
 }
 
